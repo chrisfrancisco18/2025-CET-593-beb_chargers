@@ -1,5 +1,5 @@
 # `beb_chargers` repository
-This repository contains all code related to my research on battery-electric buses (BEBs) at the University of Washington.
+All code in this repository was created and is owned by Dr. Dan McCabe (dmccabe@uw.edu). This repository was created and shared for the 2025 CET 593 battery-electric (BEB) charger exercise and class project
 
 ## Repository Structure
 * `beb_chargers`
