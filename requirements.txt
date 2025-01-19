@@ -17,3 +17,4 @@ requests
 setuptools
 bs4
 python-dotenv
+nbformat>=4.2.0

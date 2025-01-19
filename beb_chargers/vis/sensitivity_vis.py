@@ -193,7 +193,7 @@ def plot_u_rho_sensitivity():
 
     fig = plt.figure(figsize=(9, 6))
     plt.pcolor(u_vals[:n], rho_vals[:n], np.log(cvals))
-    plt.xlabel('$\overline{u}_v$ (kWh)')
+    plt.xlabel(r'$\overline{u}_v$ (kWh)')
     plt.ylabel(r'$\rho^s$ (kW)')
     plt.colorbar(label='Logarithm of cost')
     plt.tight_layout()

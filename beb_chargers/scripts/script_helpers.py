@@ -11,6 +11,7 @@ def build_trips_df(
     gtfs, date, routes, depot_coords, routes_60, route_method='exclusive',
     add_depot_dh=True, add_trip_dh=False, add_kwh_per_mi=False,
     add_durations=False, rng=None
+    , osm_fname=None
 ):
     # Initialize GTFS
     day_trips = gtfs.get_trips_from_date(date)
@@ -68,7 +69,8 @@ def build_trips_df(
     # and charger location code handle these differently, and depot DH
     # should only be added with this approach for charge scheduling).
     if add_depot_dh:
-        beb_trips = GTFSData.add_depot_deadhead(beb_trips, *depot_coords)
+        beb_trips = GTFSData.add_depot_deadhead(beb_trips, *depot_coords
+                                                , osm_fname=osm_fname)
 
     if add_durations:
         # Add duration and kwh per mi
@@ -88,7 +90,7 @@ def build_trips_df(
 
 
 def build_charger_location_inputs(
-    gtfs, trips_df, chargers_df, depot_coords, battery_cap
+    gtfs, trips_df, chargers_df, depot_coords, battery_cap, osm_fname=None
 ):
     charge_nodes = list(chargers_df['name'])
     charge_coords = dict()
@@ -104,7 +106,7 @@ def build_charger_location_inputs(
     # about vehicles or chargers (besides deadhead params)
     opt_kwargs = gtfs.build_opt_inputs(
         all_blocks, trips_df, charge_nodes,
-        charge_coords, depot_coords)
+        charge_coords, depot_coords, osm_fname=osm_fname)
 
     # Add charger details
     chargers_df = chargers_df.copy().set_index('name')

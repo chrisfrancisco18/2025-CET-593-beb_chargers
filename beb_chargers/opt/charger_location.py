@@ -595,7 +595,7 @@ class ChargerLocationModel:
         return compat_arcs, dh_dist
 
     def brp_wrapper(
-            self, n_runs_heur=50, simple_case=False, bu_kwh=None):
+            self, n_runs_heur=50, simple_case=False, bu_kwh=None, jupyter_case=None):
         """
         Wrapper function for revising blocks using the BEB-BRP heuristic.
 
@@ -619,6 +619,8 @@ class ChargerLocationModel:
         # Which pairs of trips are compatible?
         if simple_case:
             dh_fname = 'data/simple_case_deadhead.pickle'
+        elif jupyter_case != None:
+            dh_fname = jupyter_case
         else:
             dh_fname = None
         compat_arcs, dh_dist = self.get_compatible_trips(
@@ -916,13 +918,15 @@ class ChargerLocationModel:
         self.process_results()
 
     def solve(self, alpha, opt_gap=None, simple_case=False, bu_kwh=None,
-              n_runs_heur=50):
+              n_runs_heur=50
+              , jupyter_case=None):
         """Wrapper function to run BEB-BRP and BEB-OCL successively."""
         self.check_charging_needs()
         self.check_feasibility()
         if self.infeas_vehs:
             self.brp_wrapper(simple_case=simple_case, bu_kwh=bu_kwh,
-                             n_runs_heur=n_runs_heur)
+                             n_runs_heur=n_runs_heur
+                             , jupyter_case=jupyter_case)
         self.charging_vehs = [v for v in self.charging_vehs
                               if v not in self.infeas_vehs]
         self.charging_vts = [(v, t) for (v, t) in self.charging_vts

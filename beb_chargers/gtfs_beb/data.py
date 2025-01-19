@@ -601,6 +601,7 @@ class GTFSData:
     @staticmethod
     def add_depot_deadhead(
             trips_df: pd.DataFrame, depot_lat: float, depot_lon: float
+            , osm_fname = None
     ):
         """
         Add deadhead trips to and from depot. Note that these are not
@@ -644,6 +645,7 @@ class GTFSData:
         dh_data = get_updated_osm_data(
             origins=[(depot_lat, depot_lon)] + pullin_coords,
             dests=[(depot_lat, depot_lon)] + pullout_coords
+            , filename=osm_fname
         )
 
         # Add to trip distances
@@ -675,6 +677,7 @@ class GTFSData:
     def build_opt_inputs(
         charging_blocks, trip_df, charge_nodes, charge_coords,
         depot_coords
+        , osm_fname=None
     ):
         """
         Build inputs for optimization model.
@@ -729,6 +732,7 @@ class GTFSData:
 
         osm_charger_data = get_dh_dict(
             unique_start_locs, unique_end_locs, charger_locs, depot_coords
+            , osm_fname=osm_fname
         )
 
         trip_start_chg_dists = dict()
@@ -1076,6 +1080,7 @@ def get_dh_dict(
         trip_end_locs: list[tuple[float, float]],
         charger_locs: list[tuple[float, float]],
         depot_coords: list[tuple[float, float]] | tuple[float, float] = None
+        , osm_fname = None
 ) -> dict[
         tuple[tuple[float, float], tuple[float, float]],
         dict[str, float]
@@ -1106,12 +1111,17 @@ def get_dh_dict(
     # Get distances from trip ends to chargers
     # (note this function writes and reloads a file each time)
     _ = get_updated_osm_data(
-        unique_end_locs, charger_locs)
+        unique_end_locs, charger_locs
+        , filename=osm_fname
+    )
     # Get distances from chargers to trip starts
     _ = get_updated_osm_data(
         charger_locs, unique_start_locs
+        , filename=osm_fname
     )
     # Get distances between trips
     osm_charger_data = get_updated_osm_data(
-        unique_end_locs, unique_start_locs)
+        unique_end_locs, unique_start_locs
+        , filename=osm_fname
+    )
     return osm_charger_data
