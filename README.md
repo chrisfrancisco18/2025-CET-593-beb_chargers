@@ -65,6 +65,10 @@ In the Jupyter Notebook, you need to run these codes to install all libraries yo
   !pip install -r https://raw.githubusercontent.com/chrisfrancisco18/2025-CET-593-beb_chargers/main/requirements.txt
 ```
 
+### where can I get a data:
+https://uwnetid-my.sharepoint.com/:u:/g/personal/pritthik_uw_edu/Ee5LQ_KZkAVMrS8ocT8eUHQBeVcvyuZU1WGVEhTf2O9Bpg?e=U8jfrU
+(UW Email Required)
+
 ## Option 2: Clone Git `Charger Location.ipynb` file
 For those who are more familiar with GitHub, you can clone the repository
 ### Clone the Repository
