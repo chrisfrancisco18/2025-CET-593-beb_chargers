@@ -66,7 +66,7 @@ In the Jupyter Notebook, you need to run these codes to install all libraries yo
 ```
 
 ### where can I get a data:
-https://uwnetid-my.sharepoint.com/:u:/g/personal/pritthik_uw_edu/Ee5LQ_KZkAVMrS8ocT8eUHQBeVcvyuZU1WGVEhTf2O9Bpg?e=U8jfrU
+https://uwnetid-my.sharepoint.com/:u:/g/personal/pritthik_uw_edu/Ee5LQ_KZkAVMrS8ocT8eUHQBayEFUv0WcGtXvYCsBRjRSw?e=14d1FG
 (UW Email Required)
 
 ## Option 2: Clone Git `Charger Location.ipynb` file
